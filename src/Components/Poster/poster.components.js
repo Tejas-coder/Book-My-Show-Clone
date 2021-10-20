@@ -5,7 +5,7 @@ const Poster = (props) => {
         <>
         <div className="flex flex-col items-start gap-3 px-3">
             <div className="h-80">
-               <img src={props.src} alt={props.title} className="rounded-xl w-full h-full" /> 
+               <img src={`https://image.tmdb.org/t/p/original${props.poster_path}`} alt={props.original_title} className="rounded-xl w-full h-full" /> 
             </div>
             <h3 
             className={`text-lg font-bold ${props.isDark ? "text-white" : "text-gray-900"}`}
@@ -19,4 +19,6 @@ const Poster = (props) => {
 };
 
 
+
 export default Poster;
+

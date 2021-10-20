@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import EntertainmentCardSlider from "../Components/Entertainment/Entertainment.component";
-import { Premier } from "../Components/Premier/premier.component";
+import PosterSlider from "../Components/PosterSlider/posterslider.component";
+import axios from "axios";
 
 const HomePage = () => {
+
+    const [popularMovies, setPopularMovies] = useState([]);
+
+    useEffect(() => {
+    const requestPopularMovies = async() => {
+      const getPopularMovies =  await axios.get("/movie/popular");
+      setPopularMovies(getPopularMovies.data.results)
+    }
+    requestPopularMovies();
+    }, []);
+
+
     return(
         <>
         <div className="container mx-auto px-12 my-12">
@@ -16,8 +29,14 @@ const HomePage = () => {
                 className="w-full h-full"/>
             </div>
             <div className="container mx-auto">
-                <Premier />
+                <PosterSlider images={popularMovies} title="Premiers" subtitle="Brand new release every Friday" isDark={true} />
             </div>
+        </div>
+        <div className="px-12 container">
+            <PosterSlider images={popularMovies} title="Online Streaming Events" isDark={false} />
+        </div>
+        <div className="my-16 px-12 mx-auto containerr">
+            <PosterSlider images={popularMovies} title="Outdoor Events" isDark={false} />
         </div>
         </>
     );
